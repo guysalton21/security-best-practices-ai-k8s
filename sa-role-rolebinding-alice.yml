@@ -1,0 +1,32 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: alice-user
+  namespace: alice
+
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: alice-user-full-access
+  namespace: alice
+rules:
+  - apiGroups: ["", "extensions", "apps", "batch"]
+    resources: ["*"]
+    verbs: ["*"]
+
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: alice-user-view
+  namespace: alice
+subjects:
+  - kind: ServiceAccount
+    name: alice-user
+    namespace: alice
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: alice-user-full-access
