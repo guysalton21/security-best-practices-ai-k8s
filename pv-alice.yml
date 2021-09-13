@@ -13,4 +13,4 @@ spec:
   storageClassName: nfs
   nfs:
     path: /runai/alice
-    server: 10.252.55.34
+    server: <NFS_SERVER_IP>
